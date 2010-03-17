@@ -1,0 +1,7 @@
+Here's the steps you need to take to get your very own scalable CMS compute system running with Amazon EC2
+
+1) Sign up for amazon EC2
+2) Install the EC2 command line tools to somewhere like ~/.ec2
+3) Go to account-settings and create an X.509 certificate and a keypair. Save all the files with their default names into ~/.ec2
+4) Chmod your keys and certificates to 600 to prevent SSH from crying later
+5) the ec2 commands look for environment variables called EC2_HOME, EC2_PRIVATE_KEY and EC2_CERT (the last two variables will point to your x509 key and cert). It is useful to put those variables in either a shell script or your profile
