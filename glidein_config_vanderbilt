@@ -1,0 +1,36 @@
+
+LOG = $(LOCAL_DIR)/log
+EXECUTE = $(LOCAL_DIR)/execute
+ALLOW_ADMINISTRATOR = $(HOSTNAME), $(GLIDEIN_HOST)
+
+MAIL = /bin/mail
+DAEMON_LIST = MASTER, STARTD
+MASTER_ADDRESS_FILE = $(LOG)/.master_address
+MASTER = $(SBIN)/condor_master
+MASTER_LOG = $(LOG)/MasterLog
+STARTD = $(SBIN)/condor_startd
+STARTER = $(SBIN)/condor_starter
+PROCD = $(SBIN)/condor_procd
+PROCD_LOG = $(LOG)/ProcLog
+PROCD_ADDRESS = $(LOCK)/procd_address
+
+STARTER_STD = $(SBIN)/condor_starter.std
+STARTER_LIST = STARTER, STARTER_STD
+OWNER = Undefined
+USE_NFS = False
+USE_CKPT_SERVER = False
+JOB_INHERITS_STARTER_ENVIRONMENT = True
+COLLECTOR_HOST = se2.vampire
+CCB_ADDRESS    = se2.vampire
+LOCK = $(LOG)
+STARTD_LOG = $(LOG)/StartLog
+STARTER_LOG = $(LOG)/StarterLog
+
+STARTD_DEBUG = D_COMMAND
+START = True
+SUSPEND = False
+CONTINUE = True
+PREEMPT = False
+WANT_VACATE = False
+WANT_SUSPEND = False
+KILL = False
