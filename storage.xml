@@ -1,0 +1,41 @@
+<storage-mapping>
+  <!-- storage.xml
+         -Cleaned up by AMM on 4/1/10
+            Will remove gridftp rules if they're unused for a long time
+ 	-cleaned up 5/13/10
+   -->
+
+
+  <!-- Outbound Loadtest mappings -->
+  <!--   These rules will makes it so that millions and millions of LFN will map to 256 PFN -->
+  <lfn-to-pfn protocol="srmv2" destination-match=".*" path-match=".*/LoadTest07_US_Vandy_(.*)_.*_.*" result="srm://se3.accre.vanderbilt.edu:6288/srm/v2/server?SFN=/store/PhEDEx_Debug/LoadTest07Source/US_Vandy_$1"/>
+  <lfn-to-pfn protocol="direct" destination-match=".*" path-match=".*/LoadTest07_US_Vandy_(.*)_.*_.*" result="/store/PhEDEx_Debug/LoadTest07Source/US_Vandy_$1"/>
+  
+  <!-- Inbound LoadTest mappings -->
+  <!-- adding some of the loadtest paths to LoDN on SE3 -->
+   <lfn-to-pfn protocol="srmv2" destination-match=".*" path-match=".*/PhEDEx_LoadTest07/LoadTest07_Debug_US_FNAL/(.*)" result="srm://se3.accre.vanderbilt.edu:6288/srm/v2/server?SFN=/store/PhEDEx_LoadTest07/LoadTest07_Debug_US_FNAL/$1"/>
+   <lfn-to-pfn protocol="srmv2" destination-match=".*" path-match=".*/PhEDEx_LoadTest07/LoadTest07_Debug_US_Nebraska/(.*)" result="srm://se3.accre.vanderbilt.edu:6288/srm/v2/server?SFN=/store/PhEDEx_LoadTest07/LoadTest07_Debug_US_Nebraska/$1"/>
+
+
+  <lfn-to-pfn protocol="direct" destination-match=".*" path-match=".*/PhEDEx_LoadTest07/(.*)" result="/store/PhEDEx_LoadTest07/$1"/>
+   
+  <!--   PhEDEx will always place loadtest data in /store/PhEDEx_LoadTest07/, pipe that to GPFS -->
+  <lfn-to-pfn protocol="srmv2" destination-match=".*" path-match=".*/PhEDEx_LoadTest07/(.*)" result="srm://se3.accre.vanderbilt.edu:6288/srm/v2/server?SFN=/store/PhEDEx_LoadTest07/$1"/>
+ 
+  <!-- Catchall mappings -->
+  <!--   By default, shove everything to se1 -->
+  <!-- Our worker nodes will use the direct protocol -->
+  <lfn-to-pfn protocol="direct" destination-match=".*" path-match="/+(.*)" result="/gpfs3/grid/$1"/>
+  
+  <!-- map to LoDN for test jobs against that backend -->
+  <lfn-to-pfn protocol="lodn" destination-match=".*" path-match="/+(.*)" result="lodn://se1.accre.vanderbilt.edu/cms_tier3/$1"/>
+  
+  <!-- and this is the default mapping for srm -->
+  <lfn-to-pfn protocol="srmv2" destination-match=".*" path-match="/+(.*)" result="srm://se1.accre.vanderbilt.edu:6288/srm/v2/server?SFN=/$1"/>
+
+  <!-- Reverse mappings from PFN to LFN -->
+  <pfn-to-lfn protocol="nfs" destination-match=".*" path-match="/+autofs/phedex_0/(.*)" result="/$1"/>
+  <pfn-to-lfn protocol="direct" destination-match=".*" path-match="/+.*gpfs3/grid/(.*)" result="/$1"/>
+  <pfn-to-lfn protocol="srmv2" destination-match=".*" path-match=".*\?SFN=/+(.*)" result="/$1"/>
+
+</storage-mapping>

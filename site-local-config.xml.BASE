@@ -1,0 +1,43 @@
+ <site-local-config>
+ <site name="T3_US_Vanderbilt">
+    <event-data>
+      <catalog url="trivialcatalog_file://root/Condor_glidein/storage.xml?protocol=direct"/>
+    </event-data>
+    <local-stage-out>
+      <command value="srmv2" />
+      <option value="-debug" />
+      <catalog url="trivialcatalog_file://root/Condor_glidein/storage.xml?protocol=srmv2"/>
+      <se-name value="se1.accre.vanderbilt.edu" />
+    </local-stage-out>
+<fallback-stage-out>
+    <command value="srmv2-lcg" />
+    <lfn-prefix value="srm://se1.accre.vanderbilt.edu:6288/srm/v2/server?SFN=" />
+
+    <se-name value="se1.accre.vanderbilt.edu" />
+  </fallback-stage-out>
+<!-- So, this is a bit gross. I don't want to break SAM tests (which local-stage-out works for)
+     but WMAgent can't find the proper "srmv2" command with the default. So, the plan is to keep the default
+     stageout. SAM will pass that, and WMAgent will fail. WMAgent supports fallback stageout, and
+     will then move on to using lcg-cp, which should work -->
+
+<!--    <fallback-stage-out>
+      <se-name value="cmssrm.hep.wisc.edu"/>
+      <lfn-prefix value="srm://cmssrm.hep.wisc.edu:8443/srm/managerv2?SFN=/pnfs/hep.wisc.edu/data4/PA_TFC"/>
+      <command value="srmv2"/>
+      <option value="-debug"/>
+    </fallback-stage-out>
+-->
+    <calib-data>
+	<frontier-connect>  
+		<load balance="proxies"/>
+INSERTEC2HEADNODES
+	    <proxy url="http://fs1.accre.vanderbilt.edu:3128" />  
+	    <proxy url="http://fs2.accre.vanderbilt.edu:3128" />  
+	    <server url="http://cmsfrontier.cern.ch:8000/FrontierInt" />   
+	    <server url="http://cmsfrontier1.cern.ch:8000/FrontierInt" />  
+	    <server url="http://cmsfrontier2.cern.ch:8000/FrontierInt" />  
+	    <server url="http://cmsfrontier3.cern.ch:8000/FrontierInt" />  
+	 </frontier-connect>  
+    </calib-data>
+ </site>
+ </site-local-config>
