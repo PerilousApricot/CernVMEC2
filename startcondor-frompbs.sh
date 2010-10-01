@@ -2,7 +2,7 @@
 mkdir /tmp/Condor_glidein
 
 
-CONDOR_CONFIG=$HOME/Condor_glidein/glidein_condor_config
+CONDOR_CONFIG=$HOME/Condor_glidein/glidein_config_vanderbilt
 _condor_CONDOR_HOST=localhost.localdomain
 _condor_GLIDEIN_HOST=localhost.localdomain
 _condor_LOCAL_DIR=/tmp/Condor_glidein/local/`hostname`/$$
@@ -33,6 +33,8 @@ _condor_CONDOR_IDS=`id -u`.`id -g`
 MYHOST=`hostname`
 _condor_MASTER_NAME="$MYHOST.$$"
 _condor_STARTD_NAME="$MYHOST.$$"
+PATH=$HOME/python-install/bin:$PATH
+
 command -v python2.6 > /dev/null
 rc=$?
 if [[ $rc != 0 ]]; then
@@ -41,7 +43,8 @@ if [[ $rc != 0 ]]; then
 	PYTHONHOME=$HOME/python-install/
 fi
 echo "Starting Condor slave..."
-
+SCRAM_ARCH=slc5_ia32_gcc434
+X509_USER_PROXY=/home/meloam/proxy.cert
 # set the scram arch
 if [ 'x$SCRAM_ARCH' = 'x' ]; then
 	if [ `uname -m` = 'x86_64' ];then
@@ -59,6 +62,7 @@ echo "FIXME: This script currently pulls all of the current environment"
 echo "         variables into the userjobs' environment. May want to fix."
 export _condor_MASTER_NAME
 export _condor_STARTD_NAME
+export X509_USER_PROXY
 export SCRAM_ARCH
 export PATH
 export PYTHONHOME

@@ -5,14 +5,11 @@
 . /opt/cms/cmsset_default.sh prod
 
 # Setup X509 rules
-chmod 700 $HOME/.globus
-chmod 600 $HOME/.globus/*
-export X509_USER_CERT=$HOME/.globus/usercert.pem
-export X509_USER_KEY=$HOME/.globus/userkey.pem
+chmod 600 $HOME/proxy.cert
+export X509_USER_CERT=$HOME/proxy.cert
 
 
-
-CONDOR_CONFIG=$HOME/Condor_glidein/glidein_condor_config_no_ccb
+CONDOR_CONFIG=$HOME/Condor_glidein/glidein_config_amazon
 _condor_CONDOR_HOST=`wget -q -O - http://instance-data.ec2.internal/latest/meta-data/public-ipv4`
 _condor_GLIDEIN_HOST=`wget -q -O - http://instance-data.ec2.internal/latest/meta-data/public-ipv4`
 _condor_LOCAL_DIR=/mnt/dumpspace/condor
