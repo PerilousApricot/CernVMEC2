@@ -1,0 +1,13 @@
+Hey, a bundle of scripts I put together to run jobs on Amazon EC2
+
+You need to have a few things
+1) A condor pool to connect to
+2) An EC2 account
+3) A webserver the instances can pull down their tarballs
+4) A way to inject work into Condor (i.e. CRAB or WMAgent)
+
+Prerequisites
+1) Get the EC2 Tools-
+http://developer.amazonwebservices.com/connect/entry.jspa?externalID=351
+2) Add an API key and SSH key, saving both on your machine
+
