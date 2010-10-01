@@ -9,5 +9,14 @@ You need to have a few things
 Prerequisites
 1) Get the EC2 Tools-
 http://developer.amazonwebservices.com/connect/entry.jspa?externalID=351
+
+I unpacked the zip file and moved it to ~/.ec2 and added the following lines to my profile
+export EC2_HOME=~/.ec2
+export PATH=$PATH:$EC2_HOME/bin
+export EC2_PRIVATE_KEY=$EC2_HOME/pk-7JDDJALS6Z74TU64NAHYKFWZL56TOLH3.pem
+export EC2_CERT=$EC2_HOME/cert-7JDDJALS6Z74TU64NAHYKFWZL56TOLH3.pem
+
+(change your names to your particular filenames below)
+
 2) Add an API key and SSH key, saving both on your machine
 
