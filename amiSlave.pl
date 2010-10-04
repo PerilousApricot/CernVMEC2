@@ -39,7 +39,7 @@ if ($start) {
 		die "You must provide --ami and --amk to tell what to run\n";
 	}
 	if (not $startupTarball) {
-		$startupTarball = 'http://vpac00.phy.vanderbilt.edu/~meloam/sandbox';
+		$startupTarball = 'http://vpac00.phy.vanderbilt.edu/~meloam/sandbox.tar';
 	}
 	if (not $targetPool) {
 		$targetPool = 'se2.accre.vanderbilt.edu'
@@ -67,13 +67,14 @@ echo Done > /tmp/done
 echo `ifconfig` >> /tmp/done
 cd
 
-echo <<"PROXY" > proxy.cert
+cat <<"PROXY" > proxy.cert
 $proxy
 PROXY
+export X509_USER_PROXY=$HOME/proxy.cert
 export CMS_CERNVMPOOL=$targetPool
 export CMS_CERNVM_PROXY_HOST=$proxyhost
-curl -o sandbox.tar.gz $startupTarball 2>&1 >> /tmp/done
-tar -xvzf sandbox.tar.gz 1>&1 >> /tmp/done
+curl -o sandbox.tar $startupTarball 2>&1 >> /tmp/done
+tar -xvzf sandbox.tar 1>&1 >> /tmp/done
 cd Condor_glidein
 ./bootstrapEC2.sh
 exit
