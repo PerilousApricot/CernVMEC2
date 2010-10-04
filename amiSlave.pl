@@ -74,7 +74,7 @@ export X509_USER_PROXY=$HOME/proxy.cert
 export CMS_CERNVMPOOL=$targetPool
 export CMS_CERNVM_PROXY_HOST=$proxyhost
 curl -o sandbox.tar $startupTarball 2>&1 >> /tmp/done
-tar -xvzf sandbox.tar 1>&1 >> /tmp/done
+tar -xvf sandbox.tar 1>&1 >> /tmp/done
 cd Condor_glidein
 ./bootstrapEC2.sh
 exit

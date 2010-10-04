@@ -16,4 +16,4 @@ else
 fi
 
 mkdir -p SITECONF/local/JobConfig
-cp site-local-config.xml SITECONFI/local/JobConfig
+cp site-local-config.xml SITECONF/local/JobConfig
