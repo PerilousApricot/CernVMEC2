@@ -14,3 +14,6 @@ else
     awk "/INSERTEC2HEADNODE/ {print \"$output\" } 
         !/INSERTEC2HEADNODE/ {print \$0}" site-local-config.xml.BASE > site-local-config.xml
 fi
+
+mkdir -p SITECONF/local/JobConfig
+cp site-local-config.xml SITECONFI/local/JobConfig
