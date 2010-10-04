@@ -9,7 +9,7 @@ chown -R squid:squid squid
 olddir=`pwd`
 cd /mnt/dumpspace/squid
 squid -z
-cd olddir
+cd $olddir
 /etc/init.d/squid stop
 /etc/init.d/squid start
 ./modifySiteLocalConfig.sh
