@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get the grid/cms environment
-. /opt/grid/3.1.41-0/external/etc/profile.d/grid-env.sh
+. /opt/grid/3.1.39-0/external/etc/profile.d/grid-env.sh
 . /opt/cms/cmsset_default.sh prod
 
 # Setup X509 rules
