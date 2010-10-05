@@ -13,4 +13,5 @@ cd $olddir
 /etc/init.d/squid stop
 /etc/init.d/squid start
 ./modifySiteLocalConfig.sh
-./startcondor-amazon.sh &
+env | awk '/.*/ {print "export " $0}' >> /etc/rc.local
+echo './startcondor-amazon.sh' >> /etc/rc.local
