@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# loop until the cvmfs comes up
+for (( ;; )) 
+do
+    sleep 5
+	echo "Sleeping, waiting for cvmfs to come up"
+	if [ -f /opt/cms/cmsset_default.sh ]
+	then
+	    break
+	fi
+done
+
+
 # Get the grid/cms environment
 . /opt/grid/3.1.41-0/external/etc/profile.d/grid-env.sh
 . /opt/cms/cmsset_default.sh prod
@@ -74,7 +86,7 @@ export _condor_UID_DOMAIN
 export _condor_FILESYSTEM_DOMAIN
 export _condor_MAIL
 export _condor_STARTD_NOCLAIM_SHUTDOWN
-
+export CMS_ROOT=/root
 #
 # - Give the environment
 #
