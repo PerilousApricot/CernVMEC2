@@ -15,5 +15,5 @@ else
         !/INSERTEC2HEADNODE/ {print \$0}" site-local-config.xml.BASE > site-local-config.xml
 fi
 
-mkdir -p SITECONF/local/JobConfig
-cp site-local-config.xml SITECONF/local/JobConfig
+mkdir -p /root/Condor_glidein/SITECONF/local/JobConfig
+cp site-local-config.xml /root/Condor_glidein/SITECONF/local/JobConfig
