@@ -86,7 +86,7 @@ export _condor_UID_DOMAIN
 export _condor_FILESYSTEM_DOMAIN
 export _condor_MAIL
 export _condor_STARTD_NOCLAIM_SHUTDOWN
-export CMS_ROOT=/root
+export CMS_PATH=/root
 #
 # - Give the environment
 #
