@@ -1,5 +1,5 @@
 #!/bin/sh
-
+export HOME=/root/
 chmod +x *.sh
 ./makePartitions.sh
 conary update squid
@@ -13,4 +13,4 @@ cd $olddir
 /etc/init.d/squid stop
 /etc/init.d/squid start
 ./modifySiteLocalConfig.sh
-./startcondor-amazon.sh
+./startcondor-amazon.sh &
