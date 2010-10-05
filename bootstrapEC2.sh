@@ -18,8 +18,8 @@ echo 'squid -z' >> /etc/rc.local
 echo 'cd /root/Condor_glidein' >> /etc/rc.local 
 echo '/etc/init.d/squid stop' >> /etc/rc.local 
 echo '/etc/init.d/squid start' >> /etc/rc.local 
-echo './modifySiteLocalConfig.sh' >> /etc/rc.local 
 env | awk '/.*/ {print "export " $0}' >> /etc/rc.local
 
+echo './modifySiteLocalConfig.sh' >> /etc/rc.local 
 echo '#none' >> /etc/rc.local
 echo './startcondor-amazon.sh' >> /etc/rc.local
