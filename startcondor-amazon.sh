@@ -5,8 +5,19 @@
 . /opt/cms/cmsset_default.sh prod
 
 # Setup X509 rules
+chmod 755 /root
+chmod 755 /root/Condor_glidein
 chmod 600 $HOME/proxy.cert
-export X509_USER_CERT=$HOME/proxy.cert
+export X509_USER_PROXY=$HOME/proxy.cert
+
+# this may be unnecessary, but I don't hve time to check
+cp $HOME/proxy.cert /tmp/x509up_u99
+cp $HOME/proxy.cert /tmp/x509up_u0
+chmod 600 /tmp/x509up_u99
+chown nobody:nobody /tmp/x509up_u99
+chmod 600 /tmp/x509up_u0
+chown nobody:nobody /tmp/x509up_u0
+
 
 
 CONDOR_CONFIG=$HOME/Condor_glidein/glidein_config_amazon
@@ -74,7 +85,7 @@ export _condor_UID_DOMAIN
 export _condor_FILESYSTEM_DOMAIN
 export _condor_MAIL
 export _condor_STARTD_NOCLAIM_SHUTDOWN
-export CMS_PATH=/root
+export CMS_PATH=/root/Condor_glidein
 #
 # - Give the environment
 #
@@ -83,6 +94,7 @@ env
 #
 # - Start the slave
 #
+chmod -R 777 /mnt/dumpspace/condor
 echo "Starting Condor Slave..."
 $HOME/Condor_glidein/7.4.2-i686-pc-Linux-2.4/glidein_startup $@
 	
