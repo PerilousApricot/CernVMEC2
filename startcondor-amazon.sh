@@ -8,15 +8,12 @@
 chmod 755 /root
 chmod 755 /root/Condor_glidein
 chmod 600 $HOME/proxy.cert
-export X509_USER_PROXY=$HOME/proxy.cert
+export X509_USER_PROXY=/tmp/x509up_u99
 
 # this may be unnecessary, but I don't hve time to check
 cp $HOME/proxy.cert /tmp/x509up_u99
-cp $HOME/proxy.cert /tmp/x509up_u0
 chmod 600 /tmp/x509up_u99
 chown nobody:nobody /tmp/x509up_u99
-chmod 600 /tmp/x509up_u0
-chown nobody:nobody /tmp/x509up_u0
 
 
 
@@ -61,7 +58,7 @@ _condor_TCP_FORWARDING_HOST=`wget -q -O - http://instance-data.ec2.internal/late
 _condor_PRIVATE_NETWORK_INTERFACE=`hostname -i`
 _condor_PublicNetworkIpAddr=$_condor_TCP_FORWARDING_HOST
 export _condor_COLLECTOR_HOST=$CMS_CERNVMPOOL
-
+#export _condor_CCB_ADDRESS=$CMS_CERNVMPOOL
 #
 # - Do exports
 #
