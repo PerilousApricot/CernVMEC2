@@ -56,7 +56,7 @@ echo "FIXME: This script currently pulls all of the current environment"
 echo "         variables into the userjobs' environment. May want to fix."
 . /opt/cms/cmsset_default.sh
 export WMAGENT_SITE_CONFIG_OVERRIDE=`pwd`/site-local-config.xml
-_condor_hostname=`wget -q -O - http://instance-data.ec2.internal/latest/meta-data/public-hotname`
+_condor_hostname=`wget -q -O - http://instance-data.ec2.internal/latest/meta-data/public-hostname`
 _condor_TCP_FORWARDING_HOST=`wget -q -O - http://instance-data.ec2.internal/latest/meta-data/public-ipv4`
 _condor_PRIVATE_NETWORK_INTERFACE=`hostname -i`
 _condor_PublicNetworkIpAddr=$_condor_TCP_FORWARDING_HOST
