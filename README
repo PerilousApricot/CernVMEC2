@@ -1,4 +1,9 @@
-Hey, a bundle of scripts I put together to run jobs on Amazon EC2
+# Bootstrap scripts for CernVM on EC2 #
+
+Hi, these are the scripts I use to run jobs on EC2, some things are
+quick and dirty, but if you use them, patches are accepted :)
+
+-Andrew
 
 You need to have a few things
 1) A condor pool to connect to
@@ -6,16 +11,47 @@ You need to have a few things
 3) A webserver the instances can pull down their tarballs
 4) A way to inject work into Condor (i.e. CRAB or WMAgent)
 
-Prerequisites
-1) Get the EC2 Tools-
+## Prerequisites ##
+1. Get the EC2 Tools-
 http://developer.amazonwebservices.com/connect/entry.jspa?externalID=351
 
 I unpacked the zip file and moved it to ~/.ec2 and added the following lines to my profile
+
+(The private key and cert are generated on the site)
 export EC2_HOME=~/.ec2
 export PATH=$PATH:$EC2_HOME/bin
+(change your names to your particular filenames below)
+
+2. Add an API key and SSH key, saving both on your machine
+    I added the following lines to the profile:
 export EC2_PRIVATE_KEY=$EC2_HOME/pk-7JDDJALS6Z74TU64NAHYKFWZL56TOLH3.pem
 export EC2_CERT=$EC2_HOME/cert-7JDDJALS6Z74TU64NAHYKFWZL56TOLH3.pem
 
-(change your names to your particular filenames below)
+I also added the ssh private key to ~/.ec2
 
-2) Add an API key and SSH key, saving both on your machine
+3. Create a tarfile with any additional dependencies you need and name it pythonbundle.tar
+ (we use this to ship along python2.6 with some other dependencies)
+
+4. Use updateSandbox.sh to create a sandbox, and place it on a publically viewable webserver
+    we use git to make sure that changes are tracked, make sure you commi to the repo before
+	making a tarball
+
+## Running ##
+Actually running the instances is simple.
+
+./amiSlave.pl -start
+
+Will give you the required options such as
+* -proxy (directs to a squid proxy for CVMFS and CMSSW)
+* -startupTarball (http address of tarball that whill be unpacked)
+* -ami -amk (image/kernel ID for amazon)
+* -targetPool (location of the condor host)
+
+The -stop/status options don't work yet, I just used ec2-desribe-instances to tell me what I needed.
+
+Things are pretty quick and dirty, so there are some raw edges. Feel free to mail me with any quesions.
+
+best-
+Andrew Melo, Vanderbilt University
+andrew.m.melo@vanderbilt.edu
+
