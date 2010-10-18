@@ -65,14 +65,16 @@ if ($start) {
 
 echo Done > /tmp/done
 echo `ifconfig` >> /tmp/done
-cd
-
+cd /root
 cat <<"PROXY" > proxy.cert
 $proxy
 PROXY
-export X509_USER_PROXY=$HOME/proxy.cert
+export X509_USER_PROXY=/root/proxy.cert
 export CMS_CERNVMPOOL=$targetPool
 export CMS_CERNVM_PROXY_HOST=$proxyhost
+rm -rf Condor_glidein
+rm -rf python-install
+rm -rf sandbox.tar
 curl -o sandbox.tar $startupTarball 2>&1 >> /tmp/done
 tar -xvf sandbox.tar 1>&1 >> /tmp/done
 cd Condor_glidein
@@ -89,14 +91,14 @@ environment = CMS_SITECONFIG=EC2,CMS_ROOT=/opt/cms,CMSCERNVM_PROXY_HOST=$proxyho
 };
 
 	if ($proxyhost ne 'NOPROXY') {
-		$amiContext = $amiContext . "\nproxy=$proxyhost;DIRECT";
+		$amiContext = $amiContext . "\nproxy=$proxyhost";
 	}
 
 	print "Using the following as our amiContext script:\n";
 	print $amiContext . "\n";
 	my $encodedContext = MIME::Base64::encode_base64($amiContext, '');
 	system("ec2-run-instances", $ami, "--kernel", $amk, "-d", $amiContext, "-k",
-		   "melo-mbp2", "-t", "m1.large");
+		   "melo-mbp2", "-t", "m1.large","-n","4");
 }
 
 
