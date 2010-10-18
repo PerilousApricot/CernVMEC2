@@ -19,4 +19,3 @@ export EC2_CERT=$EC2_HOME/cert-7JDDJALS6Z74TU64NAHYKFWZL56TOLH3.pem
 (change your names to your particular filenames below)
 
 2) Add an API key and SSH key, saving both on your machine
-
