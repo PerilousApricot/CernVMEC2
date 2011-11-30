@@ -51,7 +51,8 @@ if ($start) {
 			"one slave then provide the INTERNAL address here\n".
 			"Format is http://<host>:<port> and semicolon separated\n".
 			"By default, the port is 8213\n\n\n".
-			"If you don't care, or this is your first host, provide NOPROXY here\n";
+			"If you don't care, or this is your first host, provide NOPROXY\n".
+			"to the --proxyHostUrl option\n";
 	}
 
 	if (not $ENV{X509_USER_PROXY}) {
@@ -98,7 +99,7 @@ environment = CMS_SITECONFIG=EC2,CMS_ROOT=/opt/cms,CMSCERNVM_PROXY_HOST=$proxyho
 	print $amiContext . "\n";
 	my $encodedContext = MIME::Base64::encode_base64($amiContext, '');
 	system("ec2-run-instances", $ami, "--kernel", $amk, "-d", $amiContext, "-k",
-		   "melo-mbp2", "-t", "m1.large","-n","4");
+		   "melo-mbp2", "-t", "m1.large");
 }
 
 
